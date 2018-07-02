@@ -1,0 +1,29 @@
+body {
+    text-align: center;
+    background-image: url("garden.jpg");
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Galada', cursive;
+}
+
+#tomato {
+    font-size: 150px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+#pomodoro {
+    font-size: 48px;
+}
+
+button {
+    width: 100px;
+    height: 35px;
+    font-size: 18px;
+    font-family: 'Galada', cursive;
+    border-radius: 5px;
+    background-color: #8E9B62;
+    border-color: #8E9B62;
+}
