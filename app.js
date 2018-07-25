@@ -1,11 +1,12 @@
 let m = 25;
 let s = 0;
+let clock;
 
 document.getElementById('clock').innerHTML = (m + ":" + s)
 
 function startTimer() {
    
-   let clock = document.getElementById('clock');
+   clock = document.getElementById('clock');
    s = s - 1;
    rollOverSeconds()
    rollOverMinutes()

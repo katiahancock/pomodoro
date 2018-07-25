@@ -1,84 +1,76 @@
-let m = 0;
-let s = 4;
+let pause = false;
+let zero = '';
+let minute = 2;
+let second = 0;
+let runClock;
 
-// Makes clock show up visually - connects to CSS div
 document.getElementById('clock').innerHTML =
-    (m + ":" + s + s)
-
+    (minute + ":" + '0' + second);
 
 function startTimer() {
-
     let clock = document.getElementById('clock');
-    s = processSecondCounter(s - 1);
-    clock.innerHTML = m + ":" + s;
-    setTimeout(startTimer, 1000);
+    if (pause == true) {
+        runClock = setInterval(countDownMinutesAndSeconds, 1000);
+        pause = false;
+    } else {
+        second = 60;
+        runClock = setInterval(countDownMinutesAndSeconds, 1000);
+    }
 }
 
-function processSecondCounter(sec) {
-    stopClock();
-    rolloverMinute();
-    addZeroUnderTen(); 
-    rollOverSeconds();
-    console.log(m + 'minutes')
-    console.log(s + 'seconds')
-    // if (s == 0){
-    //     console.log(m + 'minutes inside')
-    //     console.log('we hit zero')
-    //     // break;
-    // }
-    
-    return sec;
-
-    function stopClock() {
-        if (m == 0 && s == 00) {
-            sec = s - 0;
-        }
+function countDownMinutesAndSeconds() {
+    if (second == 60 && minute > 0) {
+        minute = minute - 1;
     }
 
-    function rollOverSeconds() {
-        if (sec < 0 && m !== 0) {
-            sec = "59";
-        };
+    if (second >= 0) {
+
+        second = second - 1;
     }
 
-    function rolloverMinute() {
-        if (s == 00 && m !== 0) {
-            m = m - 1;
-        }
-        
+    if (second < 0) {
+        second = 59;
+        minute = minute - 1;
     }
-    
 
-    function addZeroUnderTen() {
-        if (sec < 10 && sec >= 0) {
-            sec = "0" + sec;
-        };
+    if (second < 10) {
+        zero = 0
+    } else {
+        zero = '';
     }
+
+    if (minute == 0 && second == 0) {
+        clearInterval(runClock)
+        clock.innerHTML = "00:00";
+    }
+    clock.innerHTML = minute + ":" + zero + second;
 
 }
 
+function pauseClock() {
+    pause = true;
+    clearInterval(runClock);
+}
+
+function resetTimer() {
+    clearInterval(runClock);
+    minute = 2;
+    second = 0;
+    document.getElementById('clock').innerHTML = (minute + ":" + '0' + second);
+    // startTimer();
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// state === ready{
-//     startbutton.disabled = false
-//     pause.disabled = true
-//     reset.disabled = true
+// updateTimerState(state) {
+// if (state === init) {
+// document.getElementById('start').disabled = false;
+// document.getElementById('pause').disabled = true;
+// document.getElementById('reset').disabled = true;
+// } else if (state === timerOn) {
+// document.getElementById('start').disabled = true;
+// document.getElementById('pause').disabled = false;
+// document.getElementById('reset').disabled = false;
 // }
+// }
+// Makes clock show up visually - connects to CSS div
+// updateTimerState(init)
